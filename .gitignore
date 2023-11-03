@@ -142,9 +142,6 @@ dist
 # production
 /build
 
-/public/backgrounds
-/public/weatherIcons
-
 # misc
 .DS_Store
 .env.local
