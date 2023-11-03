@@ -112,6 +112,3 @@ Will be soon...
 [GitHub Actions](https://github.com/features/actions)
 
 [Heroku](https://devcenter.heroku.com/articles/heroku-cli)
-
-
-
