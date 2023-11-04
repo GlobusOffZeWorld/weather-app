@@ -7,6 +7,6 @@ interface SearchBarProps {
 }
 
 export const SearchBar: FC<SearchBarProps> = ({ forwardedRef, ...inputProps }) => (
-  <StyledInput ref={forwardedRef} {...inputProps} />
+  <StyledInput data-cy="search-bar" ref={forwardedRef} {...inputProps} />
 )
 

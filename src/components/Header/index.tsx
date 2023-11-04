@@ -112,6 +112,7 @@ export const Header: FC = () => {
                 {getAutocomplete()}
                 <Button
                   {...getButtonProps({
+                    datatype: 'search-btn',
                     onClick: () => {
                       if (userLocation?.latitude && userLocation?.longitude) {
                         const startDate = new Date()

@@ -19,12 +19,10 @@ export interface WeatherCardProps extends DayWeather {
   title: string
 }
 
-export const WeatherCard: FC<WeatherCardProps> = ({ title, temp, icon }) => {
-
-  return (
-  <Wrapper>
+export const WeatherCard: FC<WeatherCardProps> = ({ title, temp, icon }) => (
+  <Wrapper data-cy='weather-card'>
     <Title>{title}</Title>
     <WeatherIcon src={icons[pickImage(icon)] || icons['defaultIcon']} />
     <ForecastText>{Math.round(temp)}°</ForecastText>
   </Wrapper>
-)}
+)

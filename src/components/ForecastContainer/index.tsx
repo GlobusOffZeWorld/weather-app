@@ -32,9 +32,7 @@ export const ForecastContainer: FC<LayoutProps> = () => {
             const { latitude, longitude } = position.coords;
             dispatch(setUserLocation({ latitude, longitude }));
           },
-          (error) => {
-            console.error('Error getting user location');
-          }
+          (error) => console.error('Error getting user location')
         );
       }
       else {
@@ -83,10 +81,8 @@ export const ForecastContainer: FC<LayoutProps> = () => {
   }, [userLocation])
 
   return (
-    <Wrapper>
-      {currentForecastView.map((weather, index) => {
-        return <WeatherCard key={index} title={weather.datetime} {...weather} />
-      })}
+    <Wrapper data-cy='forecast'>
+      {currentForecastView.map((weather, index) => <WeatherCard key={index} title={weather.datetime} {...weather} />)}
     </Wrapper>
   )
 }
