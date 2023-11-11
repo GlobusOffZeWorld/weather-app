@@ -1,10 +1,9 @@
-import { all, fork } from "redux-saga/effects";
-import { watchGetForecast } from "./sagas/fetchForecastSaga";
+import { all, fork } from 'redux-saga/effects';
+
+import { watchGetForecast } from './sagas/fetchForecastSaga';
 
 const rootSaga = function* () {
-  yield all([
-    fork(watchGetForecast),
-  ])
-}
+  yield all([fork(watchGetForecast)]);
+};
 
-export default rootSaga
+export default rootSaga;

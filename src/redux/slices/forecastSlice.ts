@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { DayWeather } from '../../components/WeatherCard'
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { DayWeather } from '../../components/WeatherCard';
 import { userLocationType } from './userLocationSlice';
 
 interface forecastStateType {
@@ -16,28 +17,37 @@ export interface forecastPayloadType {
 }
 
 const initialState: forecastStateType = {
-  data: [{
-    datetime: "",
-    temp: 0,
-    conditions: "",
-    icon: ""
-  }],
+  data: [
+    {
+      datetime: '',
+      temp: 0,
+      conditions: '',
+      icon: ''
+    }
+  ],
   isLoading: false,
   errors: ''
-}
+};
 
 export const forecastSlice = createSlice({
   name: 'forecast',
   initialState,
   reducers: {
-    forecastFetchRequest: (state, { payload: { userLocation, startDate, endDate } }: PayloadAction<forecastPayloadType>) => {
+    forecastFetchRequest: (
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload: { userLocation, startDate, endDate } }: PayloadAction<forecastPayloadType>
+    ) => {
       state.isLoading = true;
       state.errors = '';
     },
     forecastFetchSuccess: (state, { payload: forecast }: PayloadAction<DayWeather[]>) => {
       if (forecast[0].hours && forecast[1].hours) {
-        const currentTime = (new Date().getHours())
-        state.data[0].hours = [...forecast[0].hours.slice(currentTime), ...forecast[1].hours.slice(0, currentTime)]
+        const currentTime = new Date().getHours();
+        state.data[0].hours = [
+          ...forecast[0].hours.slice(currentTime),
+          ...forecast[1].hours.slice(0, currentTime)
+        ];
       } else {
         state.data = [...forecast];
       }
@@ -46,9 +56,10 @@ export const forecastSlice = createSlice({
     forecastFetchError: (state, { payload: error }: PayloadAction<string>) => {
       state.isLoading = false;
       state.errors = error;
-    },
-  },
-})
+    }
+  }
+});
 
-export const { forecastFetchRequest, forecastFetchSuccess, forecastFetchError } = forecastSlice.actions
-export default forecastSlice.reducer
+export const { forecastFetchRequest, forecastFetchSuccess, forecastFetchError } =
+  forecastSlice.actions;
+export default forecastSlice.reducer;
