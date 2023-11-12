@@ -10,16 +10,18 @@ import {
 } from '../slices/forecastSlice';
 
 function* fetchForecastSaga({
-  payload: { userLocation, startDate, endDate }
+  payload: {
+    userLocation: { latitude, longitude },
+    startDate,
+    endDate
+  }
 }: PayloadAction<forecastPayloadType>) {
   try {
     const API_ROOT = process.env.REACT_APP_DIALY_WEATHER_BASE_URL;
 
     const daysResponse: Response = yield call(
       fetch,
-      `${API_ROOT}${userLocation.latitude},${
-        userLocation.longitude
-      }/${startDate}/${endDate}?key=${process.env
+      `${API_ROOT}${latitude},${longitude}/${startDate}/${endDate}?key=${process.env
         .REACT_APP_API_KEY!}&include=days&elements=datetime,temp,conditions,icon&unitGroup=metric`
     );
     const daysResult: ForecastResponse = yield call(() => daysResponse.json());
@@ -27,7 +29,7 @@ function* fetchForecastSaga({
 
     const hoursResponse: Response = yield call(
       fetch,
-      `${API_ROOT}${userLocation.latitude},${userLocation.longitude}/next1days/?key=${process.env
+      `${API_ROOT}${latitude},${longitude}/next1days/?key=${process.env
         .REACT_APP_API_KEY!}&include=hours&elements=datetime,temp,conditions,icon&unitGroup=metric`
     );
     const hoursResult: ForecastResponse = yield call(() => hoursResponse.json());

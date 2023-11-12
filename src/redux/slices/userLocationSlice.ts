@@ -9,8 +9,8 @@ export interface userLocationType {
 
 const initialState: userLocationType = {
   cityName: '',
-  latitude: 53.8940504,
-  longitude: 27.5472473
+  latitude: 0,
+  longitude: 0
 };
 
 export const userLocationSlice = createSlice({
