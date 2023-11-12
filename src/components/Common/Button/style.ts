@@ -11,9 +11,14 @@ export const StyledButton = styled.button`
   padding: 7px 14px;
   white-space: nowrap;
   width: fit-content;
+  transition: background-color 0.2s;
+
   &:hover {
     cursor: pointer;
+    background-color: #6e6e6e;
+    transition: background-color 0.2s;
   }
+
   @media ${devices.tablet} {
     font-size: 20px;
   }

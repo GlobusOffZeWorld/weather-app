@@ -2,24 +2,23 @@ import './index.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Loading from 'react-loading';
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import { createGlobalStyle } from 'styled-components';
 
 import App from './App';
+import { Loading } from './components/Common';
+import { Global } from './globalStyle';
+import { Error } from './pages/Error';
 import { persistor, store } from './redux/store';
 
-const Global = createGlobalStyle`
-  *, *:before, *:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
+const router = createBrowserRouter([
+  {
+    path: '/weather-app/',
+    element: <App />,
+    errorElement: <Error />
   }
-`;
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -30,7 +29,7 @@ root.render(
         loading={<Loading />}
         persistor={persistor}
       >
-        <App />
+        <RouterProvider router={router} />
       </PersistGate>
     </Provider>
   </React.StrictMode>

@@ -18,7 +18,6 @@ export const Wrapper = styled.div`
   @media ${devices.desktop} {
     max-width: 1147px;
     max-height: 674px;
-    min-height: 674px;
     height: 674px;
     gap: 34px;
     padding: 0;
