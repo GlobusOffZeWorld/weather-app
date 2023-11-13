@@ -1,12 +1,17 @@
-export const pickImage = (src: string): string => {
-  if (!src) {
-    return 'defaultImage';
+export const pickImage = (src: string) => {
+  const weatherStates = ['rain', 'snow', 'sunny', 'cloud', 'fog', 'wind', 'clear', 'thunder'];
+
+  for (let i = 0; i < weatherStates.length; i++) {
+    if (src.toLowerCase().includes(weatherStates[i])) {
+      switch (weatherStates[i]) {
+        case 'cloud':
+          return 'cloudy';
+        case 'mist':
+          return 'fog';
+      }
+      return weatherStates[i];
+    }
   }
-  let image = src
-    .split('-')
-    .map(word => word[0].toUpperCase() + word.slice(1))
-    .join('')
-    .split('.')[0];
-  image = image[0].toLowerCase() + image.slice(1);
-  return image;
+
+  return 'defaultImage';
 };

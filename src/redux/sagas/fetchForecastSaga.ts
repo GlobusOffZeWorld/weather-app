@@ -1,12 +1,16 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { ForecastResponse } from '../../components/ForecastContainer';
+import { getRequiredHourlyProperties } from '../../api/APIUtils';
+import { getDailyForecast, getHourlyForecast } from '../../api/ForecastAPI';
+import { DayWeather } from '../../components/WeatherCard';
+import { hourlyForecastResponse } from '../../types/api';
 import {
+  dailyForecastFetchSuccess,
   forecastFetchError,
   forecastFetchRequest,
-  forecastFetchSuccess,
-  forecastPayloadType
+  ForecastPayloadType,
+  hourlyForecastFetchSuccess
 } from '../slices/forecastSlice';
 
 function* fetchForecastSaga({
@@ -15,25 +19,23 @@ function* fetchForecastSaga({
     startDate,
     endDate
   }
-}: PayloadAction<forecastPayloadType>) {
+}: PayloadAction<ForecastPayloadType>) {
   try {
-    const API_ROOT = process.env.REACT_APP_DIALY_WEATHER_BASE_URL;
+    const dailyPayload = {
+      userLocation: { latitude, longitude },
+      startDate,
+      endDate
+    };
+    const daysResult: DayWeather[] = yield call(getDailyForecast, dailyPayload);
+    yield put(dailyForecastFetchSuccess(daysResult));
 
-    const daysResponse: Response = yield call(
-      fetch,
-      `${API_ROOT}${latitude},${longitude}/${startDate}/${endDate}?key=${process.env
-        .REACT_APP_API_KEY!}&include=days&elements=datetime,temp,conditions,icon&unitGroup=metric`
-    );
-    const daysResult: ForecastResponse = yield call(() => daysResponse.json());
-    yield put(forecastFetchSuccess(daysResult.days));
+    const hourlyPayload = {
+      userLocation: { latitude, longitude }
+    };
+    const hoursResponse: hourlyForecastResponse[] = yield call(getHourlyForecast, hourlyPayload);
+    const hoursResult = getRequiredHourlyProperties(hoursResponse);
 
-    const hoursResponse: Response = yield call(
-      fetch,
-      `${API_ROOT}${latitude},${longitude}/next1days/?key=${process.env
-        .REACT_APP_API_KEY!}&include=hours&elements=datetime,temp,conditions,icon&unitGroup=metric`
-    );
-    const hoursResult: ForecastResponse = yield call(() => hoursResponse.json());
-    yield put(forecastFetchSuccess(hoursResult.days));
+    yield put(hourlyForecastFetchSuccess(hoursResult));
   } catch (error) {
     yield put(forecastFetchError(String(error)));
   }

@@ -10,11 +10,13 @@ export const ForecastTypeSelector: FC = () => {
   const forecastType = useSelector((state: RootState) => state.forecastType.type);
   const dispatch = useDispatch();
 
+  const handleOnClick = () => dispatch(triggerForecastType());
+
   return (
     <Wrapper>
       <Button
         datatype={'forecast-type-selector'}
-        onClick={() => dispatch(triggerForecastType())}
+        onClick={handleOnClick}
       >
         {forecastType}
       </Button>

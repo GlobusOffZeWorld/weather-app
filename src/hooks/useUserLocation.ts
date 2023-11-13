@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { setUserLocation } from '../redux/slices/userLocationSlice';
 
-export const useUserLocation = () => {
+export const useCurrentUserLocation = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,7 +13,6 @@ export const useUserLocation = () => {
           position => {
             const { latitude, longitude } = position.coords;
             dispatch(setUserLocation({ cityName: 'Current position', latitude, longitude }));
-            console.log(latitude, longitude);
           },
           error => console.error('Error getting user location', error)
         );
