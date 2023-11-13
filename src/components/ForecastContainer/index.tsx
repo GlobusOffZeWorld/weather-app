@@ -56,9 +56,9 @@ export const ForecastContainer: FC<LayoutProps> = () => {
     if (userLocation.latitude && userLocation.longitude) {
       let isCacheOutOfDate = false;
       if (forecastType === 'Daily') {
-        const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+        const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
         isCacheOutOfDate =
-          Date.now() - new Date(forecast[0].datetime).getTime() > MILLISECONDS_PER_DAY;
+          Date.now() - new Date(forecast[0].datetime).getTime() > MILLISECONDS_IN_DAY;
       } else if (forecast[0].hours) {
         isCacheOutOfDate = +new Date().getHours() > +forecast[0].hours[0].datetime.split(':')[0];
       }

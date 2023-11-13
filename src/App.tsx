@@ -1,57 +1,21 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
-import background from './assets/background.png';
+import { Wrapper } from './appStyle';
 import { Loading } from './components/Common';
 import { Widget } from './components/Widget';
-import { backgrounds } from './constants/backgrounds';
-import { setUserLocation } from './redux/slices/userLocationSlice';
+import { images } from './constants/images';
+import { useUserLocation } from './hooks/useUserLocation';
 import { RootState } from './redux/store';
 import { pickImage } from './utils';
 
-const Wrapper = styled.div.attrs<{ $background?: string }>(props => ({
-  $background: props.$background || background
-}))`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  background: url(${props => props.$background});
-  background-size: cover;
-  background-position: center;
-  justify-content: center;
-  align-items: center;
-  padding: 29px 20px;
-  transition: 0.4s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-`;
-
 function App() {
   const { data, isLoading } = useSelector((state: RootState) => state.forecast);
-  const dispatch = useDispatch();
-  console.log('rendered');
+  useUserLocation();
 
-  useEffect(() => {
-    const getUserLocation = async () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            const { latitude, longitude } = position.coords;
-            dispatch(setUserLocation({ cityName: 'Current position', latitude, longitude }));
-          },
-          error => console.error('Error getting user location', error)
-        );
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-      }
-    };
-    getUserLocation();
-  }, []);
   return (
-    <Wrapper $background={backgrounds[pickImage(data[0].icon)] || backgrounds['defaultIcon']}>
+    <Wrapper
+      $background={images[pickImage(data[0].icon)].background || images['defaultImage'].background}
+    >
       {isLoading ? <Loading /> : <Widget />}
     </Wrapper>
   );
