@@ -1,5 +1,4 @@
-import { DayWeather } from '../components/WeatherCard';
-import { ForecastPayloadType } from '../redux/slices/forecastSlice';
+import { DayWeather, ForecastPayloadType } from './models';
 
 export type ForecastResponse = DayWeather[];
 export type HourlyForecastProps = Omit<ForecastPayloadType, 'startDate' | 'endDate'>;

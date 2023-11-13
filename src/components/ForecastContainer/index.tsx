@@ -2,15 +2,13 @@ import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FORECAST_LENGTH } from '../../constants';
+import { useCurrentUserLocation } from '../../hooks/useUserLocation';
 import { forecastFetchRequest } from '../../redux/slices/forecastSlice';
 import { RootState } from '../../redux/store';
+import { DayWeather, LayoutProps } from '../../types/models';
 import { formatDate } from '../../utils/dateUtils';
-import { DayWeather, WeatherCard } from '../WeatherCard';
+import { WeatherCard } from '../WeatherCard';
 import { Wrapper } from './style';
-
-interface LayoutProps {
-  children?: React.ReactNode;
-}
 
 export const ForecastContainer: FC<LayoutProps> = () => {
   const dailyForecast = useSelector((state: RootState) => state.forecast.dailyData);
@@ -22,19 +20,23 @@ export const ForecastContainer: FC<LayoutProps> = () => {
 
   const [currentForecastView, setCurrentForecastView] = useState<DayWeather[]>([...dailyForecast]);
 
+  useCurrentUserLocation();
+
   useEffect(() => {
     if (forecastType === 'Hourly') {
-      setCurrentForecastView(
-        hourlyForecast.slice(0, FORECAST_LENGTH).map((weather, index) => {
-          const currentWeather = { ...weather };
-          currentWeather.datetime =
-            index !== 0 ? weather.datetime.split(':').slice(0, -1).join(':') : 'Now';
-          return currentWeather;
-        })
-      );
+      if (hourlyForecast) {
+        setCurrentForecastView(
+          hourlyForecast.slice(0, FORECAST_LENGTH).map((weather, index: number) => {
+            const currentWeather = { ...weather };
+            currentWeather.datetime =
+              index !== 0 ? weather.datetime.split(':').slice(0, -1).join(':') : 'Now';
+            return currentWeather;
+          })
+        );
+      }
     } else {
       setCurrentForecastView(
-        dailyForecast.slice(0, FORECAST_LENGTH).map((weather, index) => {
+        dailyForecast.slice(0, FORECAST_LENGTH).map((weather, index: number) => {
           const currentWeather = { ...weather };
           currentWeather.datetime =
             index !== 0

@@ -1,14 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { CalendarEvent } from '../../components/Calendar';
+import { CalendarEvent, CalendarType } from '../../types/models';
 
-export interface calendarType {
-  isSigned: boolean;
-  calendarEventList: CalendarEvent[];
-}
-
-const initialState: calendarType = {
+const initialState: CalendarType = {
   isSigned: false,
   calendarEventList: []
 };

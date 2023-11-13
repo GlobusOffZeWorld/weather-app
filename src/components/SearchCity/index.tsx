@@ -8,23 +8,12 @@ import { FORECAST_LENGTH } from '../../constants';
 import { forecastFetchRequest } from '../../redux/slices/forecastSlice';
 import { setUserLocation } from '../../redux/slices/userLocationSlice';
 import { RootState } from '../../redux/store';
+import { AutocompleteField } from '../../types/models';
 import { formatDate, getForecastInterval } from '../../utils/dateUtils';
 import { Button } from '../Common';
 import { SearchBar } from '../Common/SearchBar';
 import { ESConfig } from './ESConfig';
 import { SearchContainer } from './style';
-
-interface AutocompleteField {
-  city: {
-    raw: string;
-  };
-  geolocation: {
-    raw: {
-      latitude: string;
-      longitude: string;
-    };
-  };
-}
 
 export const SearchCity: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);

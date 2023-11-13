@@ -1,5 +1,5 @@
-import { ForecastPayloadType } from '../redux/slices/forecastSlice';
 import { HourlyForecastProps } from '../types/api';
+import { ForecastPayloadType } from '../types/models';
 
 export const getDailyForecast = async ({
   userLocation: { latitude, longitude },

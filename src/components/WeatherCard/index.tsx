@@ -1,19 +1,9 @@
 import { FC } from 'react';
 
 import { images } from '../../constants/images';
+import { WeatherCardProps } from '../../types/models';
 import { pickImage } from '../../utils';
 import { ForecastText, Title, WeatherIcon, Wrapper } from './style';
-
-export interface DayWeather {
-  datetime: string;
-  temp: number;
-  conditions: string;
-  icon: string;
-}
-
-export interface WeatherCardProps extends DayWeather {
-  title: string;
-}
 
 export const WeatherCard: FC<WeatherCardProps> = ({ title, temp, icon }) => (
   <Wrapper data-cy="weather-card">

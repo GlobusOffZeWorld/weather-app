@@ -1,13 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface userLocationType {
-  cityName?: string;
-  latitude: number;
-  longitude: number;
-}
+import { UserLocationType } from '../../types/models';
 
-const initialState: userLocationType = {
+const initialState: UserLocationType = {
   cityName: '',
   latitude: 0,
   longitude: 0
@@ -19,7 +15,7 @@ export const userLocationSlice = createSlice({
   reducers: {
     setUserLocation: (
       state,
-      { payload: { cityName, latitude, longitude } }: PayloadAction<userLocationType>
+      { payload: { cityName, latitude, longitude } }: PayloadAction<UserLocationType>
     ) => {
       state.cityName = cityName;
       state.latitude = latitude;
