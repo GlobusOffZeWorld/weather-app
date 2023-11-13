@@ -6,6 +6,8 @@ export default defineConfig({
       // implement node event listeners here
     },
   },
+  viewportWidth: 1800,
+  viewportHeight: 1000,
 
   component: {
     devServer: {

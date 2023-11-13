@@ -11,7 +11,7 @@ export const ForecastTypeSelector: FC = () => {
 
   return (
     <Wrapper>
-      <Button onClick={() => dispatch(triggerForecastType())}>{forecastType}</Button>
+      <Button datatype={'forecast-type-selector'} onClick={() => dispatch(triggerForecastType())}>{forecastType}</Button>
     </Wrapper>
   )
 }

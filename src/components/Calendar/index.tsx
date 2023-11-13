@@ -65,20 +65,23 @@ export const Calendar: FC = () => {
   return (
     <Wrapper>
       <CalendarEventsContainer>
-        {calendarEventList.map((item: CalendarEvent, index: number) => {
-          const time = new Date(item.start.dateTime).toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          })
-          const title = item.summary
-          return (
-            <CalendarMessage key={index}>
-              <TimeBubble>{time}</TimeBubble>
-              <MessageText>{title}</MessageText>
-            </CalendarMessage>
-          )
-        })}
+        {(isSigned && calendarEventList.length < 1) ?
+          <MessageText>There is no events today</MessageText> :
+          calendarEventList.map((item: CalendarEvent, index: number) => {
+            const time = new Date(item.start.dateTime).toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })
+            const title = item.summary
+            return (
+              <CalendarMessage key={index}>
+                <TimeBubble>{time}</TimeBubble>
+                <MessageText>{title}</MessageText>
+              </CalendarMessage>
+            )
+          })}
+
       </CalendarEventsContainer>
       <AuthorizationContainer>
         {!isSigned ?
