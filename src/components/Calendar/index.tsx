@@ -67,8 +67,7 @@ export const Calendar: FC = () => {
   const handleSignIn = (): void => {
     apiCalendar
       .handleAuthClick()
-      .then(res => {
-        console.log(res);
+      .then(() => {
         const timeMin = new Date();
         const timeMax = new Date(timeMin);
         timeMax.setDate(timeMin.getDate() + 1);

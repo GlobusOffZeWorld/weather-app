@@ -61,7 +61,7 @@ export const SearchCity: FC = () => {
   }, []);
 
   const handleSearchButtonClick = () => {
-    if (userLocation?.latitude && userLocation?.longitude) {
+    if (userLocation.latitude && userLocation.longitude) {
       const [startDate, endDate] = getForecastInterval(FORECAST_LENGTH);
       dispatch(
         forecastFetchRequest({
@@ -80,8 +80,8 @@ export const SearchCity: FC = () => {
     dispatch(
       setUserLocation({
         cityName: city.raw,
-        latitude: +geolocation.raw.latitude,
-        longitude: +geolocation.raw.longitude
+        latitude: Number(geolocation.raw.latitude),
+        longitude: Number(geolocation.raw.longitude)
       })
     );
   };

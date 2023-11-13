@@ -9,12 +9,6 @@ export interface DayWeather {
   temp: number;
   conditions: string;
   icon: string;
-  hours?: {
-    datetime: string;
-    conditions: string;
-    temp: number;
-    icon: string;
-  }[];
 }
 
 export interface WeatherCardProps extends DayWeather {
