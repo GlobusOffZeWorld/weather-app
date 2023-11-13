@@ -1,13 +1,14 @@
+import { WeatherCard } from '@components';
+import { FORECAST_LENGTH, MILLISECONDS_IN_DAY } from '@constants';
+import { useCurrentUserLocation } from '@hooks';
+import { formatDate } from '@utils/dateUtils';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FORECAST_LENGTH } from '../../constants';
-import { useCurrentUserLocation } from '../../hooks/useUserLocation';
-import { forecastFetchRequest } from '../../redux/slices/forecastSlice';
-import { RootState } from '../../redux/store';
-import { DayWeather, LayoutProps } from '../../types/models';
-import { formatDate } from '../../utils/dateUtils';
-import { WeatherCard } from '../WeatherCard';
+import { forecastFetchRequest } from '@/redux/slices/forecastSlice';
+import { RootState } from '@/redux/store';
+import { DayWeather, LayoutProps } from '@/types/models';
+
 import { Wrapper } from './style';
 
 export const ForecastContainer: FC<LayoutProps> = () => {
@@ -54,7 +55,6 @@ export const ForecastContainer: FC<LayoutProps> = () => {
     if (userLocation.latitude && userLocation.longitude) {
       let isCacheOutOfDate = false;
       if (forecastType === 'Daily') {
-        const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
         isCacheOutOfDate =
           Date.now() - new Date(dailyForecast[0].datetime).getTime() > MILLISECONDS_IN_DAY;
       } else if (hourlyForecast) {

@@ -1,9 +1,6 @@
+import { Calendar, ForecastContainer, ForecastTypeSelector, Header } from '@components';
 import { FC } from 'react';
 
-import { Calendar } from '../Calendar';
-import { ForecastContainer } from '../ForecastContainer';
-import { ForecastTypeSelector } from '../ForecastTypeSelector';
-import { Header } from '../Header';
 import { Flex, InfoSection, Wrapper } from './style';
 
 export const Widget: FC = () => (

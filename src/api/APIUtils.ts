@@ -1,4 +1,4 @@
-import { hourlyForecastResponse } from '../types/api';
+import { hourlyForecastResponse } from '@/types/api';
 
 export const getRequiredHourlyProperties = (data: hourlyForecastResponse[]) => {
   const intervalsData = data.map((interval: hourlyForecastResponse) => {

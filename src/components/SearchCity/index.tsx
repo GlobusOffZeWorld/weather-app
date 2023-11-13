@@ -1,17 +1,17 @@
 import '@elastic/react-search-ui-views/lib/styles/styles.css';
 
+import { Button, SearchBar } from '@components/Common';
+import { FORECAST_LENGTH } from '@constants';
 import { ErrorBoundary, SearchBox, SearchProvider } from '@elastic/react-search-ui';
+import { formatDate, getForecastInterval } from '@utils/dateUtils';
 import { FC, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FORECAST_LENGTH } from '../../constants';
-import { forecastFetchRequest } from '../../redux/slices/forecastSlice';
-import { setUserLocation } from '../../redux/slices/userLocationSlice';
-import { RootState } from '../../redux/store';
-import { AutocompleteField } from '../../types/models';
-import { formatDate, getForecastInterval } from '../../utils/dateUtils';
-import { Button } from '../Common';
-import { SearchBar } from '../Common/SearchBar';
+import { forecastFetchRequest } from '@/redux/slices/forecastSlice';
+import { setUserLocation } from '@/redux/slices/userLocationSlice';
+import { RootState } from '@/redux/store';
+import { AutocompleteField } from '@/types/models';
+
 import { ESConfig } from './ESConfig';
 import { SearchContainer } from './style';
 

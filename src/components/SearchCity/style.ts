@@ -1,6 +1,5 @@
+import { devices } from '@constants';
 import styled from 'styled-components';
-
-import { devices } from '../../constants';
 
 export const SearchContainer = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
-import { HourlyForecastProps } from '../types/api';
-import { ForecastPayloadType } from '../types/models';
+import { HourlyForecastProps } from '@/types/api';
+import { ForecastPayloadType } from '@/types/models';
 
 export const getDailyForecast = async ({
   userLocation: { latitude, longitude },

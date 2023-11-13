@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setUserLocation } from '../redux/slices/userLocationSlice';
+import { setUserLocation } from '@/redux/slices/userLocationSlice';
 
 export const useCurrentUserLocation = () => {
   const dispatch = useDispatch();
