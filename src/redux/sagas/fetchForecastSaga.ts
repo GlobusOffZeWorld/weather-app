@@ -1,16 +1,16 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getRequiredHourlyProperties } from '../../api/APIUtils';
-import { getDailyForecast, getHourlyForecast } from '../../api/ForecastAPI';
-import { hourlyForecastResponse } from '../../types/api';
-import { DayWeather, ForecastPayloadType } from '../../types/models';
+import { getRequiredHourlyProperties } from '@/api/APIUtils';
+import { getDailyForecast, getHourlyForecast } from '@/api/ForecastAPI';
 import {
   dailyForecastFetchSuccess,
   forecastFetchError,
   forecastFetchRequest,
   hourlyForecastFetchSuccess
-} from '../slices/forecastSlice';
+} from '@/redux/slices/forecastSlice';
+import { hourlyForecastResponse } from '@/types/api';
+import { DayWeather, ForecastPayloadType } from '@/types/models';
 
 function* fetchForecastSaga({
   payload: {

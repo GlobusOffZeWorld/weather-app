@@ -1,8 +1,8 @@
+import { Widget } from '@components';
+import { Loading } from '@components/Common';
 import { useSelector } from 'react-redux';
 
 import { Wrapper } from './appStyle';
-import { Loading } from './components/Common';
-import { Widget } from './components/Widget';
 import { images } from './constants/images';
 import { RootState } from './redux/store';
 import { pickImage } from './utils';

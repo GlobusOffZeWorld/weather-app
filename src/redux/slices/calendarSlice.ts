@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { CalendarEvent, CalendarType } from '../../types/models';
+import { CalendarEvent, CalendarType } from '@/types/models';
 
 const initialState: CalendarType = {
   isSigned: false,

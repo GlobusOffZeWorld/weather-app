@@ -1,11 +1,12 @@
+import { Button } from '@components/Common';
 import { FC } from 'react';
 import ApiCalendar from 'react-google-calendar-api';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setCalendarEventList, setIsSigned } from '../../redux/slices/calendarSlice';
-import { RootState } from '../../redux/store';
-import { CalendarEvent, CalendarResponse } from '../../types/models';
-import { Button } from '../Common/Button';
+import { setCalendarEventList, setIsSigned } from '@/redux/slices/calendarSlice';
+import { RootState } from '@/redux/store';
+import { CalendarEvent, CalendarResponse } from '@/types/models';
+
 import {
   AuthorizationContainer,
   CalendarEventsContainer,

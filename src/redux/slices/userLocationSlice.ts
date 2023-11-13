@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { UserLocationType } from '../../types/models';
+import { UserLocationType } from '@/types/models';
 
 const initialState: UserLocationType = {
   cityName: '',

@@ -1,8 +1,9 @@
+import { images } from '@constants';
+import { pickImage } from '@utils/pickImage';
 import { FC } from 'react';
 
-import { images } from '../../constants/images';
-import { WeatherCardProps } from '../../types/models';
-import { pickImage } from '../../utils';
+import { WeatherCardProps } from '@/types/models';
+
 import { ForecastText, Title, WeatherIcon, Wrapper } from './style';
 
 export const WeatherCard: FC<WeatherCardProps> = ({ title, temp, icon }) => (

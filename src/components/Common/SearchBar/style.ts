@@ -1,6 +1,5 @@
+import { devices } from '@constants';
 import styled from 'styled-components';
-
-import { devices } from '../../../constants';
 
 export const StyledInput = styled.input`
   border-radius: 5px;

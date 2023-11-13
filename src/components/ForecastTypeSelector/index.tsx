@@ -1,9 +1,10 @@
+import { Button } from '@components/Common';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { triggerForecastType } from '../../redux/slices/forecastTypeSlice';
-import { RootState } from '../../redux/store';
-import { Button } from '../Common';
+import { triggerForecastType } from '@/redux/slices/forecastTypeSlice';
+import { RootState } from '@/redux/store';
+
 import { Wrapper } from './style';
 
 export const ForecastTypeSelector: FC = () => {

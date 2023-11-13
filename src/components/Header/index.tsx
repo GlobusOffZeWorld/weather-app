@@ -1,7 +1,6 @@
+import { DateContainer, SearchCity } from '@components';
 import { FC } from 'react';
 
-import { DateContainer } from '../DateContainer';
-import { SearchCity } from '../SearchCity';
 import { Wrapper } from './style';
 
 export const Header: FC = () => (
