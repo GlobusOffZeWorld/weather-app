@@ -1,35 +1,36 @@
 import styled from 'styled-components';
-import { devices } from "../../constants";
+
+import { devices } from '../../constants';
 
 export const CalendarEventsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 19px;
-`
+`;
 
 export const CalendarMessage = styled.div`
   display: flex;
   gap: 26px;
   align-items: center;
-`
+`;
 
 export const TimeBubble = styled.div`
   display: flex;
   border-radius: 20px;
-  background: #122E65;
-  color: #FFF;
+  background: #122e65;
+  color: #fff;
   font-size: 18px;
   padding: 8px;
   width: 64px;
   justify-content: center;
   align-items: end;
-`
+`;
 
 export const MessageText = styled.p`
   color: #000;
   font-size: 23px;
-`
+`;
 
 export const AuthorizationContainer = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ export const AuthorizationContainer = styled.div`
     justify-content: center;
     gap: 48px;
   }
-`
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -55,4 +56,4 @@ export const Wrapper = styled.div`
     align-items: start;
     gap: 34px;
   }
-`
+`;

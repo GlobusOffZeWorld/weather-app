@@ -1,12 +1,13 @@
-import { FC, useEffect, useState } from "react";
-import { WeatherCard, DayWeather } from "../WeatherCard"
-import { FORECAST_LENGTH } from "../../constants"
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { forecastFetchRequest } from "../../redux/slices/forecastSlice";
-import { setUserLocation } from "../../redux/slices/userLocationSlice";
-import { Wrapper } from "./style";
-import { formatDate } from "../../utils/formatDate";
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { FORECAST_LENGTH } from '../../constants';
+import { forecastFetchRequest } from '../../redux/slices/forecastSlice';
+import { setUserLocation } from '../../redux/slices/userLocationSlice';
+import { RootState } from '../../redux/store';
+import { formatDate } from '../../utils/dateUtils';
+import { DayWeather, WeatherCard } from '../WeatherCard';
+import { Wrapper } from './style';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -17,72 +18,92 @@ export interface ForecastResponse {
 }
 
 export const ForecastContainer: FC<LayoutProps> = () => {
-  const forecast = useSelector((state: RootState) => state.forecast.data)
-  const userLocation = useSelector((state: RootState) => state.userLocation)
-  const forecastType = useSelector((state: RootState) => state.forecastType.type)
-  const dispatch = useDispatch()
+  const forecast = useSelector((state: RootState) => state.forecast.data);
+  const userLocation = useSelector((state: RootState) => state.userLocation);
+  const forecastType = useSelector((state: RootState) => state.forecastType.type);
+  const dispatch = useDispatch();
 
-  const [currentForecastView, setCurrentForecastView] = useState<DayWeather[]>([...forecast])
+  const [currentForecastView, setCurrentForecastView] = useState<DayWeather[]>([...forecast]);
 
   useEffect(() => {
     const getUserLocation = async () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (position) => {
+          position => {
             const { latitude, longitude } = position.coords;
-            dispatch(setUserLocation({ latitude, longitude }));
+            dispatch(setUserLocation({ cityName: 'Current position', latitude, longitude }));
           },
-          (error) => console.error('Error getting user location')
+          error => console.error('Error getting user location', error)
         );
-      }
-      else {
+      } else {
         console.error('Geolocation is not supported by this browser.');
       }
     };
-    getUserLocation()
-  }, [])
+    getUserLocation();
+  }, []);
 
   useEffect(() => {
     if (forecastType === 'Hourly') {
       if (forecast[0].hours) {
-        setCurrentForecastView(forecast[0].hours.slice(0, FORECAST_LENGTH).map((weather, index) => {
-          const currentWeather = { ...weather }
-          currentWeather.datetime = (index !== 0) ? weather.datetime.split(":").slice(0, -1).join(":") : 'Now'
-          return currentWeather
-        }))
+        setCurrentForecastView(
+          forecast[0].hours.slice(0, FORECAST_LENGTH).map((weather, index) => {
+            const currentWeather = { ...weather };
+            currentWeather.datetime =
+              index !== 0 ? weather.datetime.split(':').slice(0, -1).join(':') : 'Now';
+            return currentWeather;
+          })
+        );
       }
     } else {
-      setCurrentForecastView(forecast.slice(0, FORECAST_LENGTH).map((weather, index) => {
-        const currentWeather = { ...weather }
-        currentWeather.datetime = (index !== 0) ? new Date(weather.datetime).toLocaleDateString("en-GB", {
-          weekday: 'long'
-        }) : 'Today';
-        return currentWeather
-      }))
+      setCurrentForecastView(
+        forecast.slice(0, FORECAST_LENGTH).map((weather, index) => {
+          const currentWeather = { ...weather };
+          currentWeather.datetime =
+            index !== 0
+              ? new Date(weather.datetime).toLocaleDateString('en-GB', {
+                  weekday: 'long'
+                })
+              : 'Today';
+          return currentWeather;
+        })
+      );
     }
-  }, [forecastType, forecast])
+  }, [forecastType, forecast]);
 
   useEffect(() => {
     if (userLocation.latitude && userLocation.longitude) {
-      let isCacheOutOfDate = false
+      let isCacheOutOfDate = false;
       if (forecastType === 'Daily') {
-        isCacheOutOfDate = (Date.now() - new Date(forecast[0].datetime).getTime() > 24 * 60 * 60 * 1000)
+        isCacheOutOfDate =
+          Date.now() - new Date(forecast[0].datetime).getTime() > 24 * 60 * 60 * 1000;
       } else if (forecast[0].hours) {
-        isCacheOutOfDate = ((+new Date().getHours()) > (+forecast[0].hours[0].datetime.split(':')[0]))
+        isCacheOutOfDate = +new Date().getHours() > +forecast[0].hours[0].datetime.split(':')[0];
       }
 
       if (forecast.length < 2 || isCacheOutOfDate) {
-        const startDate = new Date()
-        const endDate = new Date()
-        endDate.setDate(startDate.getDate() + FORECAST_LENGTH)
-        dispatch(forecastFetchRequest({ userLocation, startDate: formatDate(startDate), endDate: formatDate(endDate) }))
+        const startDate = new Date();
+        const endDate = new Date();
+        endDate.setDate(startDate.getDate() + FORECAST_LENGTH);
+        dispatch(
+          forecastFetchRequest({
+            userLocation,
+            startDate: formatDate(startDate),
+            endDate: formatDate(endDate)
+          })
+        );
       }
     }
-  }, [userLocation])
+  }, [userLocation]);
 
   return (
-    <Wrapper data-cy='forecast'>
-      {currentForecastView.map((weather, index) => <WeatherCard key={index} title={weather.datetime} {...weather} />)}
+    <Wrapper data-cy="forecast">
+      {currentForecastView.map((weather, index) => (
+        <WeatherCard
+          key={index}
+          title={weather.datetime}
+          {...weather}
+        />
+      ))}
     </Wrapper>
-  )
-}
+  );
+};

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import { devices } from "../../../constants";
+
+import { devices } from '../../../constants';
 
 export const StyledInput = styled.input`
   border-radius: 5px;
-  background: #FFF;
+  background: #fff;
   width: 100%;
   height: 38px;
   border: none;
@@ -13,6 +14,6 @@ export const StyledInput = styled.input`
   min-width: 120px;
   @media ${devices.tablet} {
     font-size: 22px;
-    min-width: 173px;
+    min-width: 200px;
   }
-`
+`;

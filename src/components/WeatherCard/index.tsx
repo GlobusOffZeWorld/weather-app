@@ -1,6 +1,8 @@
-import { FC } from "react";
-import { ForecastText, Title, WeatherIcon, Wrapper } from "./style";
-import { icons, pickImage } from "../../utils";
+import { FC } from 'react';
+
+import { icons } from '../../constants/icons';
+import { pickImage } from '../../utils';
+import { ForecastText, Title, WeatherIcon, Wrapper } from './style';
 
 export interface DayWeather {
   datetime: string;
@@ -16,13 +18,13 @@ export interface DayWeather {
 }
 
 export interface WeatherCardProps extends DayWeather {
-  title: string
+  title: string;
 }
 
 export const WeatherCard: FC<WeatherCardProps> = ({ title, temp, icon }) => (
-  <Wrapper data-cy='weather-card'>
+  <Wrapper data-cy="weather-card">
     <Title>{title}</Title>
     <WeatherIcon src={icons[pickImage(icon)] || icons['defaultIcon']} />
     <ForecastText>{Math.round(temp)}°</ForecastText>
   </Wrapper>
-)
+);

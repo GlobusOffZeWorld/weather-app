@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { devices } from "../../constants";
+
+import { devices } from '../../constants';
 
 export const Wrapper = styled.div`
   flex-direction: row;
@@ -12,16 +13,15 @@ export const Wrapper = styled.div`
   align-items: center;
   flex-grow: 1;
   @media ${devices.tablet} {
-  max-height: 460px;
-    
+    max-height: 460px;
   }
   @media ${devices.desktop} {
     width: 100%;
     flex-wrap: nowrap;
-    background: rgba(217, 217, 217, 0.20);
+    background: rgba(217, 217, 217, 0.2);
     max-height: 216px;
     padding: 18px 70px 16px 39px;
     gap: 39px;
     height: 100%;
   }
-`
+`;

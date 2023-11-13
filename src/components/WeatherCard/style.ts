@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { devices } from "../../constants";
+
+import { devices } from '../../constants';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ export const Wrapper = styled.div`
   }
 
   @media ${devices.desktop} {
-    height:100%;
+    height: 100%;
     width: 100%;
 
     &:first-child {
@@ -28,24 +29,24 @@ export const Wrapper = styled.div`
       min-width: 269px;
       flex-direction: row;
       flex-wrap: wrap;
-      &>img{
+      & > img {
         order: -1;
         grid-row-start: 1;
         grid-row-end: 3;
         min-width: 137px;
       }
-      &>p{
+      & > p {
         font-size: 29px;
-        &:first-child{
+        &:first-child {
           align-self: end;
         }
-        &:last-child{
+        &:last-child {
           align-self: start;
         }
       }
     }
   }
-`
+`;
 
 export const Title = styled.p`
   color: #000;
@@ -57,7 +58,7 @@ export const Title = styled.p`
   @media ${devices.tablet} {
     font-size: 18px;
   }
-`
+`;
 
 export const WeatherIcon = styled.img`
   width: 100%;
@@ -71,7 +72,7 @@ export const WeatherIcon = styled.img`
     max-width: 84px;
     max-height: 100%;
   }
-`
+`;
 
 export const ForecastText = styled.p`
   color: #000;
@@ -83,4 +84,4 @@ export const ForecastText = styled.p`
   @media ${devices.tablet} {
     font-size: 22px;
   }
-`
+`;
