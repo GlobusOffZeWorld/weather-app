@@ -1,23 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DayWeather } from '../../components/WeatherCard';
-import { userLocationType } from './userLocationSlice';
+import { DayWeather, ForecastPayloadType, ForecastStateType } from '../../types/models';
 
-interface forecastStateType {
-  dailyData: DayWeather[];
-  hourlyData: DayWeather[];
-  isLoading: boolean;
-  errors: string;
-}
-
-export interface ForecastPayloadType {
-  userLocation: userLocationType;
-  startDate: string;
-  endDate: string;
-}
-
-const initialState: forecastStateType = {
+const initialState: ForecastStateType = {
   dailyData: [
     {
       datetime: '',

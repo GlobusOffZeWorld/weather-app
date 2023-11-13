@@ -9,4 +9,5 @@ export const Wrapper = styled.div`
   align-items: center;
   position: fixed;
   margin: -20px;
+  z-index: 1;
 `;

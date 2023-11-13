@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setCalendarEventList, setIsSigned } from '../../redux/slices/calendarSlice';
 import { RootState } from '../../redux/store';
+import { CalendarEvent, CalendarResponse } from '../../types/models';
 import { Button } from '../Common/Button';
 import {
   AuthorizationContainer,
@@ -13,41 +14,6 @@ import {
   TimeBubble,
   Wrapper
 } from './style';
-
-interface CalendarResponse {
-  kind: string;
-  etag: string;
-  summary: string;
-  description: string;
-  updated: string;
-  timeZone: string;
-  accessRole: string;
-  defaultReminders: [
-    {
-      method: string;
-      minutes: number;
-    }
-  ];
-  items: CalendarEvent[];
-}
-
-export interface CalendarEvent {
-  status: string;
-  htmlLink: string;
-  summary: string;
-  organizer: {
-    email: string;
-    self: boolean;
-  };
-  start: {
-    dateTime: string;
-    timeZone: string;
-  };
-  end: {
-    dateTime: string;
-    timeZone: string;
-  };
-}
 
 const config = {
   clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID!,

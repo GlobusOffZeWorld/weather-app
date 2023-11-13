@@ -3,13 +3,12 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { getRequiredHourlyProperties } from '../../api/APIUtils';
 import { getDailyForecast, getHourlyForecast } from '../../api/ForecastAPI';
-import { DayWeather } from '../../components/WeatherCard';
 import { hourlyForecastResponse } from '../../types/api';
+import { DayWeather, ForecastPayloadType } from '../../types/models';
 import {
   dailyForecastFetchSuccess,
   forecastFetchError,
   forecastFetchRequest,
-  ForecastPayloadType,
   hourlyForecastFetchSuccess
 } from '../slices/forecastSlice';
 

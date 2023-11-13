@@ -4,13 +4,11 @@ import { Wrapper } from './appStyle';
 import { Loading } from './components/Common';
 import { Widget } from './components/Widget';
 import { images } from './constants/images';
-import { useCurrentUserLocation } from './hooks/useUserLocation';
 import { RootState } from './redux/store';
 import { pickImage } from './utils';
 
 function App() {
   const { dailyData, isLoading } = useSelector((state: RootState) => state.forecast);
-  useCurrentUserLocation();
 
   return (
     <Wrapper
@@ -18,7 +16,8 @@ function App() {
         images[pickImage(dailyData[0].icon)]?.background || images['defaultImage'].background
       }
     >
-      {isLoading ? <Loading /> : <Widget />}
+      <Widget />
+      {isLoading && <Loading />}
     </Wrapper>
   );
 }

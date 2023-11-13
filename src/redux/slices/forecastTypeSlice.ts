@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type IntervalType = {
-  type: 'Daily' | 'Hourly';
-};
+import { IntervalType } from '../../types/models';
 
 const initialState: IntervalType = {
   type: 'Daily'
