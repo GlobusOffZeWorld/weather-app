@@ -11,12 +11,13 @@ export const Wrapper = styled.div`
   height: 100%;
   width: 100%;
   gap: 10px;
-  max-width: 507px;
+  max-width: 1147px;
+  min-height: 800px;
   padding: 13px 12px;
   flex-grow: 1;
   @media ${devices.desktop} {
-    max-width: 1147px;
     max-height: 674px;
+    min-height: 0;
     height: 674px;
     gap: 34px;
     padding: 0;
