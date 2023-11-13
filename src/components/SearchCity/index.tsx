@@ -73,6 +73,19 @@ export const SearchCity: FC = () => {
     }
   };
 
+  const handleSelectAutocomplete = ({ city, geolocation }: AutocompleteField) => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+    dispatch(
+      setUserLocation({
+        cityName: city.raw,
+        latitude: +geolocation.raw.latitude,
+        longitude: +geolocation.raw.longitude
+      })
+    );
+  };
+
   return (
     <SearchProvider config={ESConfig}>
       <ErrorBoundary>
@@ -105,20 +118,7 @@ export const SearchCity: FC = () => {
           }}
           debounceLength={0}
           shouldClearFilters={true}
-          onSelectAutocomplete={({ city, geolocation }: AutocompleteField) => {
-            if (inputRef.current) {
-              inputRef.current.value = '';
-            }
-            console.dir(city);
-            console.dir(geolocation);
-            dispatch(
-              setUserLocation({
-                cityName: city.raw,
-                latitude: +geolocation.raw.latitude,
-                longitude: +geolocation.raw.longitude
-              })
-            );
-          }}
+          onSelectAutocomplete={handleSelectAutocomplete}
         />
       </ErrorBoundary>
     </SearchProvider>

@@ -15,7 +15,7 @@ export const ESConfig = {
   },
   autocompleteQuery: {
     results: {
-      resultsPerPage: 5,
+      resultsPerPage: 10,
       search_fields: {
         'city.suggest': {
           weight: 3

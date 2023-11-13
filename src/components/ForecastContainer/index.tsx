@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FORECAST_LENGTH } from '../../constants';
 import { forecastFetchRequest } from '../../redux/slices/forecastSlice';
-import { setUserLocation } from '../../redux/slices/userLocationSlice';
 import { RootState } from '../../redux/store';
 import { formatDate } from '../../utils/dateUtils';
 import { DayWeather, WeatherCard } from '../WeatherCard';
@@ -24,23 +23,6 @@ export const ForecastContainer: FC<LayoutProps> = () => {
   const dispatch = useDispatch();
 
   const [currentForecastView, setCurrentForecastView] = useState<DayWeather[]>([...forecast]);
-
-  useEffect(() => {
-    const getUserLocation = async () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            const { latitude, longitude } = position.coords;
-            dispatch(setUserLocation({ cityName: 'Current position', latitude, longitude }));
-          },
-          error => console.error('Error getting user location', error)
-        );
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-      }
-    };
-    getUserLocation();
-  }, []);
 
   useEffect(() => {
     if (forecastType === 'Hourly') {
@@ -74,8 +56,9 @@ export const ForecastContainer: FC<LayoutProps> = () => {
     if (userLocation.latitude && userLocation.longitude) {
       let isCacheOutOfDate = false;
       if (forecastType === 'Daily') {
+        const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
         isCacheOutOfDate =
-          Date.now() - new Date(forecast[0].datetime).getTime() > 24 * 60 * 60 * 1000;
+          Date.now() - new Date(forecast[0].datetime).getTime() > MILLISECONDS_PER_DAY;
       } else if (forecast[0].hours) {
         isCacheOutOfDate = +new Date().getHours() > +forecast[0].hours[0].datetime.split(':')[0];
       }
@@ -97,9 +80,9 @@ export const ForecastContainer: FC<LayoutProps> = () => {
 
   return (
     <Wrapper data-cy="forecast">
-      {currentForecastView.map((weather, index) => (
+      {currentForecastView.map(weather => (
         <WeatherCard
-          key={index}
+          key={weather.datetime}
           title={weather.datetime}
           {...weather}
         />

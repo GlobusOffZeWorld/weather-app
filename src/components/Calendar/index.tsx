@@ -1,6 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import ApiCalendar from 'react-google-calendar-api';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { setCalendarEventList, setIsSigned } from '../../redux/slices/calendarSlice';
+import { RootState } from '../../redux/store';
 import { Button } from '../Common/Button';
 import {
   AuthorizationContainer,
@@ -28,7 +31,7 @@ interface CalendarResponse {
   items: CalendarEvent[];
 }
 
-interface CalendarEvent {
+export interface CalendarEvent {
   status: string;
   htmlLink: string;
   summary: string;
@@ -46,18 +49,20 @@ interface CalendarEvent {
   };
 }
 
+const config = {
+  clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID!,
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY!,
+  scope: 'https://www.googleapis.com/auth/calendar.events.readonly',
+  discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+};
+
+const apiCalendar = new ApiCalendar(config);
+
 export const Calendar: FC = () => {
-  const [calendarEventList, setCalendarEventList] = useState<CalendarEvent[]>([]);
-  const [isSigned, setIsSigned] = useState(false);
+  const isSigned = useSelector((state: RootState) => state.calendar.isSigned);
+  const calendarEventList = useSelector((state: RootState) => state.calendar.calendarEventList);
 
-  const config = {
-    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID!,
-    apiKey: process.env.REACT_APP_GOOGLE_API_KEY!,
-    scope: 'https://www.googleapis.com/auth/calendar.events.readonly',
-    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
-  };
-
-  const apiCalendar = new ApiCalendar(config);
+  const dispatch = useDispatch();
 
   const handleSignIn = (): void => {
     apiCalendar
@@ -75,9 +80,9 @@ export const Calendar: FC = () => {
             orderBy: 'startTime'
           })
           .then(({ result }: { result: CalendarResponse }) => {
-            setCalendarEventList(result.items);
+            dispatch(setCalendarEventList(result.items));
           });
-        setIsSigned(true);
+        dispatch(setIsSigned(true));
       })
       .catch(() => {
         console.error('Popup closed');
@@ -86,30 +91,30 @@ export const Calendar: FC = () => {
 
   const handleSignOut = (): void => {
     apiCalendar.handleSignoutClick();
-    setIsSigned(false);
-    setCalendarEventList([]);
+    dispatch(setIsSigned(false));
+    dispatch(setCalendarEventList([]));
+  };
+
+  const getFormattedTime = (dateTime: string) => {
+    return new Date(dateTime).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
   };
 
   return (
     <Wrapper>
       <CalendarEventsContainer>
-        {isSigned && calendarEventList.length < 1 ? (
+        {isSigned && calendarEventList.length === 0 ? (
           <MessageText>There is no events today</MessageText>
         ) : (
-          calendarEventList.map((item: CalendarEvent, index: number) => {
-            const time = new Date(item.start.dateTime).toLocaleTimeString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false
-            });
-            const title = item.summary;
-            return (
-              <CalendarMessage key={index}>
-                <TimeBubble>{time}</TimeBubble>
-                <MessageText>{title}</MessageText>
-              </CalendarMessage>
-            );
-          })
+          calendarEventList.map((item: CalendarEvent) => (
+            <CalendarMessage key={item.htmlLink}>
+              <TimeBubble>{getFormattedTime(item.start.dateTime)}</TimeBubble>
+              <MessageText>{item.summary}</MessageText>
+            </CalendarMessage>
+          ))
         )}
       </CalendarEventsContainer>
       <AuthorizationContainer>

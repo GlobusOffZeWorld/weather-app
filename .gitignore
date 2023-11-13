@@ -137,7 +137,6 @@ dist
 
 # testing
 /coverage
-/cypress
 
 # production
 /build
