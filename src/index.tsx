@@ -1,6 +1,7 @@
 import './index.css';
 
 import { Loading } from '@components/Common';
+import { ErrorBoundary } from '@components/ErrorBoundary';
 import { Global } from '@components/Theme/global';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -24,14 +25,16 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <Global />
-    <Provider store={store}>
-      <PersistGate
-        loading={<Loading />}
-        persistor={persistor}
-      >
-        <RouterProvider router={router} />
-      </PersistGate>
-    </Provider>
+    <ErrorBoundary fallback={<p>Something went wrong...</p>}>
+      <Global />
+      <Provider store={store}>
+        <PersistGate
+          loading={<Loading />}
+          persistor={persistor}
+        >
+          <RouterProvider router={router} />
+        </PersistGate>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );

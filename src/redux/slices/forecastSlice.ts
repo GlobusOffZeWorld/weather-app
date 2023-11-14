@@ -21,7 +21,7 @@ const initialState: ForecastStateType = {
     }
   ],
   isLoading: false,
-  errors: ''
+  error: ''
 };
 
 export const forecastSlice = createSlice({
@@ -34,7 +34,7 @@ export const forecastSlice = createSlice({
       { payload: { userLocation, startDate, endDate } }: PayloadAction<ForecastPayloadType>
     ) => {
       state.isLoading = true;
-      state.errors = '';
+      state.error = '';
     },
     dailyForecastFetchSuccess: (state, { payload: forecast }: PayloadAction<DayWeather[]>) => {
       state.dailyData = [...forecast];
@@ -46,7 +46,7 @@ export const forecastSlice = createSlice({
     },
     forecastFetchError: (state, { payload: error }: PayloadAction<string>) => {
       state.isLoading = false;
-      state.errors = error;
+      state.error = error;
     }
   }
 });

@@ -1,5 +1,5 @@
 import { theme } from '@components/Theme';
-import { InputHTMLAttributes, RefObject } from 'react';
+import { InputHTMLAttributes, ReactNode, RefObject } from 'react';
 
 export interface CalendarResponse {
   kind: string;
@@ -72,7 +72,7 @@ export interface ForecastStateType {
   dailyData: DayWeather[];
   hourlyData: DayWeather[];
   isLoading: boolean;
-  errors: string;
+  error: string;
 }
 
 export interface ForecastPayloadType {
@@ -99,3 +99,12 @@ export type IntervalType = {
 export type ThemeType = {
   type: keyof typeof theme;
 };
+
+export interface ErrorBoundaryProps {
+  children: ReactNode;
+  fallback: ReactNode;
+}
+
+export interface ErrorBoundaryState {
+  hasError: boolean;
+}

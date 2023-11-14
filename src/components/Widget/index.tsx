@@ -1,4 +1,5 @@
 import { Calendar, ForecastContainer, ForecastTypeSelector, Header } from '@components';
+import { ErrorBoundary } from '@components/ErrorBoundary';
 import { theme } from '@components/Theme';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
@@ -20,11 +21,15 @@ export const Widget: FC = () => {
         <InfoSection>
           <Header />
           <Flex>
-            <Calendar />
+            <ErrorBoundary fallback={<p>Something wrong with forecast</p>}>
+              <Calendar />
+            </ErrorBoundary>
             <ForecastTypeSelector />
           </Flex>
         </InfoSection>
-        <ForecastContainer />
+        <ErrorBoundary fallback={<p>Something wrong with forecast</p>}>
+          <ForecastContainer />
+        </ErrorBoundary>
       </Wrapper>
     </ThemeProvider>
   );
