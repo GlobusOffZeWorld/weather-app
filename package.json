@@ -39,6 +39,7 @@
   "eslintConfig": {
     "extends": []
   },
+  "eslintIgnore": ["craco.config.ts"],
   "browserslist": {
     "production": [
       ">0.2%",
