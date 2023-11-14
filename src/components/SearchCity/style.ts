@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const SearchContainer = styled.div`
   display: flex;
-  padding: 49px 0 0;
+  padding: 23px 0 0;
   justify-content: space-between;
   gap: 14px;
   justify-content: space-between;

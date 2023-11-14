@@ -6,16 +6,20 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   background: ${({ theme }) => theme.background};
   height: 100%;
   width: 100%;
   gap: 10px;
   max-width: 1147px;
-  min-height: 800px;
+  min-height: 600px;
   padding: 13px 12px;
   flex-grow: 1;
   transition: background 0.2s;
+  @media ${devices.tablet} {
+    min-height: 800px;
+  }
   @media ${devices.desktop} {
     min-height: 0;
     height: 674px;

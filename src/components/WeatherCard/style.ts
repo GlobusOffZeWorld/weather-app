@@ -50,7 +50,7 @@ export const Wrapper = styled.div`
 export const Title = styled.p`
   color: ${({ theme }) => theme.text};
   font-family: Inter;
-  font-size: 14px;
+  font-size: 12px;
   @media ${devices.tablet} {
     font-size: 18px;
   }
@@ -60,8 +60,8 @@ export const WeatherIcon = styled.img`
   width: 100%;
   max-width: 48px;
   max-height: 100%;
-  padding: 8px 0 8px;
   @media ${devices.tablet} {
+    padding: 8px 0 8px;
     max-width: 64px;
   }
   @media ${devices.desktop} {
