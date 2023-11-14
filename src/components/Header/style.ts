@@ -6,11 +6,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding-bottom: 33px;
   @media ${devices.tablet} {
-    width: 420px;
+    width: 500px;
   }
   @media ${devices.desktop} {
     flex-direction: row;
-    width: 985px;
+    width: 1000px;
     justify-content: space-between;
   }
 `;
