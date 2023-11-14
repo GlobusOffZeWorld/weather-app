@@ -16,11 +16,11 @@ export const Wrapper = styled.div`
   }
   @media ${devices.desktop} {
     width: 100%;
+    height: 100%;
     flex-wrap: nowrap;
-    background: rgba(217, 217, 217, 0.2);
+    background: ${({ theme }) => theme.background};
     max-height: 216px;
     padding: 18px 70px 16px 39px;
     gap: 39px;
-    height: 100%;
   }
 `;

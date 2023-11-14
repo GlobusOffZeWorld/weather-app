@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const H1 = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   text-align: center;
   font-size: 20px;
   @media ${devices.tablet} {

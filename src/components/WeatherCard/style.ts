@@ -48,12 +48,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   font-family: Inter;
   font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
   @media ${devices.tablet} {
     font-size: 18px;
   }
@@ -74,12 +71,9 @@ export const WeatherIcon = styled.img`
 `;
 
 export const ForecastText = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   font-family: Inter;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
   @media ${devices.tablet} {
     font-size: 22px;
   }
