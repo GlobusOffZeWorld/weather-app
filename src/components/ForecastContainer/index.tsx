@@ -17,7 +17,6 @@ export const ForecastContainer: FC<LayoutProps> = () => {
   const userLocation = useSelector((state: RootState) => state.userLocation);
   const forecastType = useSelector((state: RootState) => state.forecastType.type);
   const dispatch = useDispatch();
-  console.log('rerendered');
 
   const [currentForecastView, setCurrentForecastView] = useState<DayWeather[]>([...dailyForecast]);
 

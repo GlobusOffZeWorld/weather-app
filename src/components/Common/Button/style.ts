@@ -1,11 +1,13 @@
 import { devices } from '@constants';
 import styled from 'styled-components';
 
+import { COLORS } from '@/components/Theme/colors';
+
 export const StyledButton = styled.button`
   border-radius: 10px;
-  background: #000;
+  background: ${({ theme }) => theme.buttonColor};
   border: none;
-  color: #fff;
+  color: ${({ theme }) => theme.buttonText};
   font-size: 16px;
   padding: 7px 14px;
   white-space: nowrap;
@@ -14,7 +16,7 @@ export const StyledButton = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: #6e6e6e;
+    background-color: ${COLORS.gray};
     transition: background-color 0.2s;
   }
 

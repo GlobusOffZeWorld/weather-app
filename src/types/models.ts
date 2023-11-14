@@ -1,3 +1,4 @@
+import { theme } from '@components/Theme';
 import { InputHTMLAttributes, RefObject } from 'react';
 
 export interface CalendarResponse {
@@ -93,4 +94,8 @@ export interface UserLocationType {
 
 export type IntervalType = {
   type: 'Daily' | 'Hourly';
+};
+
+export type ThemeType = {
+  type: keyof typeof theme;
 };

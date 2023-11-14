@@ -17,8 +17,8 @@ export const CalendarMessage = styled.div`
 export const TimeBubble = styled.div`
   display: flex;
   border-radius: 20px;
-  background: #122e65;
-  color: #fff;
+  background: ${({ theme }) => theme.timeBubble};
+  color: ${({ theme }) => theme.buttonText};
   font-size: 18px;
   padding: 8px;
   width: 64px;
@@ -27,7 +27,7 @@ export const TimeBubble = styled.div`
 `;
 
 export const MessageText = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   font-size: 23px;
 `;
 

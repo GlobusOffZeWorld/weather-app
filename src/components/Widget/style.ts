@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(8px);
-  background: rgba(217, 217, 217, 0.2);
+  background: ${({ theme }) => theme.background};
   height: 100%;
   width: 100%;
   gap: 10px;
@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
   min-height: 800px;
   padding: 13px 12px;
   flex-grow: 1;
+  transition: background 0.2s;
   @media ${devices.desktop} {
-    max-height: 674px;
     min-height: 0;
     height: 674px;
     gap: 34px;
